@@ -51,6 +51,11 @@ function reducer(state, action) {
         items: updateRemoveItems,
         totalAmount: updateRemoveAmount,
       };
+    case "RESET":
+      return {
+        items: [],
+        totalAmount: 0,
+      };
     default:
       return state;
   }
