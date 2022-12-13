@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./mealItem.module.css";
 import MealItemForm from "./MealItemForm";
-import { CartContext } from "../../../context/cart-context";
+import { useDispatch } from "react-redux";
+import { add } from "../../../store";
 
 const MealItem = (props) => {
   const price = `$${props.price.toFixed(2)}`;
-  const { dispatch } = useContext(CartContext);
+  const dispatch = useDispatch();
   const addToCartHandler = (amount) => {
     const item = {
       id: props.id,
@@ -13,7 +14,7 @@ const MealItem = (props) => {
       amount,
       price: props.price,
     };
-    dispatch({ type: "ADD", item });
+    dispatch(add(item));
   };
   return (
     <li className={styles.meal}>

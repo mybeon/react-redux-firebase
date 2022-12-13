@@ -1,12 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CartIcon from "../Cart/CartIcon";
 import styles from "./headerCartButton.module.css";
-import { CartContext } from "../../context/cart-context";
+import { useSelector } from "react-redux";
 
 const HeaderCartButton = (props) => {
-  const {
-    state: { items },
-  } = useContext(CartContext);
+  const items = useSelector((state) => state.items);
   const [animeBtn, setAnimeBtn] = useState(false);
   const cartItemNumber = items.reduce((acc, currentItem) => {
     return acc + currentItem.amount;
