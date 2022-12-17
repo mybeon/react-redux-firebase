@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./CartItem.module.css";
 import { useDispatch } from "react-redux";
-import { add, remove } from "../../store";
+import { add, remove } from "../../store/cart-slice";
 
 const CartItem = (props) => {
   const price = `$${props.price.toFixed(2)}`;

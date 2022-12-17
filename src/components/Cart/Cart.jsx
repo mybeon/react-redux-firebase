@@ -6,7 +6,7 @@ import Checkout from "./Checkout";
 import { db } from "../../firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
-import { reset } from "../../store";
+import { reset, hideCart } from "../../store/cart-slice";
 
 const Cart = (props) => {
   const [userName, setUserName] = useState("");
@@ -40,7 +40,12 @@ const Cart = (props) => {
 
   const cartActions = (
     <div className={styles.actions}>
-      <button className={styles["button--alt"]} onClick={props.onHideCart}>
+      <button
+        className={styles["button--alt"]}
+        onClick={() => {
+          dispatch(hideCart());
+        }}
+      >
         Close
       </button>
       {!emptyCart && (
@@ -68,7 +73,7 @@ const Cart = (props) => {
   }
 
   return (
-    <Modal onBackdropClick={props.onHideCart}>
+    <Modal>
       <ul className={styles["cart-items"]}>
         {cartState.items.map((item) => (
           <CartItem key={item.id} {...item} />
@@ -78,7 +83,7 @@ const Cart = (props) => {
         <span>Total Amount</span>
         <span>${cartState.totalAmount.toFixed(2)}</span>
       </div>
-      {isCheckout && <Checkout onCancel={props.onHideCart} onSubmit={handleOrder} />}
+      {isCheckout && <Checkout onSubmit={handleOrder} />}
       {!isCheckout && cartActions}
     </Modal>
   );

@@ -1,7 +1,10 @@
 import React, { useRef, useState } from "react";
 import styles from "./checkout.module.css";
+import { useDispatch } from "react-redux";
+import { hideCart } from "../../store/cart-slice";
 
 const Checkout = (props) => {
+  const dispatch = useDispatch();
   const nameRef = useRef();
   const addressRef = useRef();
   const postalRef = useRef();
@@ -61,7 +64,12 @@ const Checkout = (props) => {
         <input ref={cityRef} type="text" id="city" />
       </div>
       <div className={styles.actions}>
-        <button type="button" onClick={props.onCancel}>
+        <button
+          type="button"
+          onClick={() => {
+            dispatch(hideCart());
+          }}
+        >
           cancel
         </button>
         <button className={styles.submit}>submit</button>

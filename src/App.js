@@ -1,28 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import Cart from "./components/Cart/Cart";
 import Header from "./components/layout/Header";
 import Meals from "./components/Meals/Meals";
-import { CartProvider } from "./context/cart-context";
+import { useSelector } from "react-redux";
 import "./main.css";
+import useUpdateCart from "./hooks/cart/use-updateCart";
+import useFetchCart from "./hooks/cart/use-fetchCart";
 
 function App() {
-  const [cartIsShown, setCartIsShown] = useState(false);
-
-  const showCartHandler = () => {
-    setCartIsShown(true);
-  };
-  const hideCartHandler = () => {
-    setCartIsShown(false);
-  };
+  const cart = useSelector((state) => state);
+  useUpdateCart();
+  useFetchCart();
 
   return (
-    <CartProvider>
-      {cartIsShown && <Cart onHideCart={hideCartHandler} />}
-      <Header onShowCart={showCartHandler} />
+    <React.Fragment>
+      {cart.cartIsShown && <Cart />}
+      <Header />
       <main>
         <Meals />
       </main>
-    </CartProvider>
+    </React.Fragment>
   );
 }
 

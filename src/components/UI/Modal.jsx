@@ -1,11 +1,21 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import styles from "./modal.module.css";
+import { useDispatch } from "react-redux";
+import { hideCart } from "../../store/cart-slice";
 
 const element = document.getElementById("overlays");
 
 const Backdrop = (props) => {
-  return <div className={styles.backdrop} onClick={props.onClick} />;
+  const dispatch = useDispatch();
+  return (
+    <div
+      className={styles.backdrop}
+      onClick={() => {
+        dispatch(hideCart());
+      }}
+    />
+  );
 };
 
 const ModalOverlay = ({ children }) => {
@@ -16,10 +26,10 @@ const ModalOverlay = ({ children }) => {
   );
 };
 
-const Modal = ({ children, onBackdropClick }) => {
+const Modal = ({ children }) => {
   return (
     <React.Fragment>
-      {createPortal(<Backdrop onClick={onBackdropClick} />, element)}
+      {createPortal(<Backdrop />, element)}
       {createPortal(<ModalOverlay>{children}</ModalOverlay>, element)}
     </React.Fragment>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./mealItem.module.css";
 import MealItemForm from "./MealItemForm";
 import { useDispatch } from "react-redux";
-import { add } from "../../../store";
+import { add } from "../../../store/cart-slice";
 
 const MealItem = (props) => {
   const price = `$${props.price.toFixed(2)}`;
