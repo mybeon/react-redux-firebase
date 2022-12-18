@@ -7,3 +7,54 @@
 body {
   font-family: "Montserrat";
 }
+
+.summary {
+  text-align: center;
+  max-width: 45rem;
+  width: 90%;
+  margin: auto;
+  margin-top: -10rem;
+  position: relative;
+  background-color: #383838;
+  color: white;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 1px 18px 10px rgba(0, 0, 0, 0.25);
+}
+
+.summary h2 {
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+.summary p {
+  margin: 16px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 65%;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 5rem auto 5rem auto;
+}
+table td {
+  padding: 15px;
+}
+table thead td {
+  background-color: #383838;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 13px;
+  border: 1px solid #383838;
+}
+table tbody td {
+  color: #636363;
+  border: 1px solid #dde1dd;
+}
+table tbody tr {
+  background-color: #f9fafb;
+}
+table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
