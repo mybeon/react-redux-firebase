@@ -13,7 +13,7 @@ const Cart = (props) => {
   const [isCheckout, setIsCheckout] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const cartState = useSelector((state) => state);
+  const cartState = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const emptyCart = cartState.items.length === 0;
 

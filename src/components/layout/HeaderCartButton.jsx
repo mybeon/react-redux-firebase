@@ -4,7 +4,7 @@ import styles from "./headerCartButton.module.css";
 import { useSelector } from "react-redux";
 
 const HeaderCartButton = (props) => {
-  const items = useSelector((state) => state.items);
+  const items = useSelector((state) => state.cart.items);
   const [animeBtn, setAnimeBtn] = useState(false);
   const cartItemNumber = items.reduce((acc, currentItem) => {
     return acc + currentItem.amount;

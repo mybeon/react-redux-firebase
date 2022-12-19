@@ -3,6 +3,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { BeatLoader } from "react-spinners";
 import Table from "../components/Table";
+import ProtectedRoute from "../components/auth/ProtectedRoute";
 
 const Orders = () => {
   const [orders, setOrders] = useState(null);
@@ -29,14 +30,14 @@ const Orders = () => {
     tableContent = <Table data={orders} />;
   }
   return (
-    <React.Fragment>
+    <ProtectedRoute>
       <section className="summary">
         <h2>Your orders. See your last orders !</h2>
         <p>Choose your favorite meal from our broad selection of available meals and enjoy a delicious lunch or dinner at home.</p>
         <p>All our meals are cooked with high-quality ingredients, just-in-time and of course by experienced chefs!</p>
       </section>
       {tableContent}
-    </React.Fragment>
+    </ProtectedRoute>
   );
 };
 

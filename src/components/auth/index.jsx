@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./auth.module.css";
 import { FiX } from "react-icons/fi";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 import Modal from "../UI/Modal";
 import Register from "./Register";
