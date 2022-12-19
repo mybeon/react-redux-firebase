@@ -1,0 +1,79 @@
+.button {
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background-color: #4d1601;
+  color: white;
+  padding: 0.75rem 3rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 25px;
+  font-weight: bold;
+  margin: 0 auto 1rem auto;
+}
+
+.button:hover,
+.button:active {
+  background-color: #2c0d00;
+}
+
+.tab-container {
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-container button {
+  all: unset;
+  width: 6rem;
+  border-bottom: 1px solid #2c0d0079;
+  height: 3.2rem;
+  text-align: center;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+
+.tab-container button.active {
+  background-color: #ecad9279;
+}
+
+.tab-container button:hover {
+  background-color: #2c0d00da;
+  color: white;
+}
+
+.remember-me {
+  width: 70%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 auto 1rem auto;
+}
+.remember-me span {
+  font-size: 0.8rem;
+  margin-left: 0.4rem;
+}
+
+.icon {
+  all: unset;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  transition: opacity 300ms ease-in-out;
+}
+
+.icon:hover {
+  opacity: 0.6;
+}
+
+.error {
+  display: block;
+  text-align: center;
+  color: rgb(199, 72, 72);
+  font-weight: bold;
+  font-size: 0.8rem;
+}
