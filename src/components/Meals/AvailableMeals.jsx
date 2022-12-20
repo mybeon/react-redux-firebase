@@ -4,6 +4,7 @@ import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 const AvailableMeals = () => {
   const [data, setData] = useState([]);
@@ -28,6 +29,9 @@ const AvailableMeals = () => {
   }, []);
   return (
     <section className={styles.meals}>
+      <Link to="/orders" className={styles.button}>
+        Orders
+      </Link>
       <Card>
         {loading && <p style={{ textAlign: "center" }}>Loading...</p>}
         <ul>

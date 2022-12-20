@@ -5,12 +5,15 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { BeatLoader } from "react-spinners";
 import { motion, AnimatePresence } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { addNotification } from "../../store/auth-slice";
 
 const SignIn = (props) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const emailRef = useRef();
   const passRef = useRef();
+  const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -19,6 +22,7 @@ const SignIn = (props) => {
     const passValue = passRef.current.value;
     try {
       await signInWithEmailAndPassword(auth, emailValue, passValue);
+      dispatch(addNotification({ type: "success", message: "successfully signed in." }));
       props.close();
     } catch (e) {
       setLoading(false);

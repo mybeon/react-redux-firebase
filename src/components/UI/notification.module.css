@@ -1,0 +1,42 @@
+.container {
+  height: 50px;
+  position: fixed;
+  width: 250px;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  color: white;
+  animation: notification 2500ms ease-in-out forwards;
+}
+
+.container.success {
+  background-color: rgb(38, 189, 71);
+}
+.container.error {
+  background-color: rgb(189, 38, 38);
+}
+
+@keyframes notification {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -40px);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  70% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -40px);
+  }
+}

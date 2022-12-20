@@ -10,6 +10,7 @@ import useUpdateCart from "./hooks/cart/use-updateCart";
 import useFetchCart from "./hooks/cart/use-fetchCart";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
+import Notification from "./components/UI/Notification";
 function App() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function App() {
   return (
     <React.Fragment>
       {cart.cartIsShown && <Cart />}
+      <Notification />
       <Header />
       <main>
         <RouterProvider router={router} />
