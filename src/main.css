@@ -72,3 +72,19 @@ table tbody tr:nth-child(odd) {
 .no-orders a {
   color: #4d1601;
 }
+
+.terms {
+  width: 60%;
+  margin: 2rem auto 0 auto;
+}
+
+.terms h2 {
+  margin-bottom: 2rem;
+}
+.terms h3 {
+  margin: 1rem 0;
+}
+
+.terms p {
+  margin-bottom: 1rem;
+}
