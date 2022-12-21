@@ -1,24 +1,26 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { db } from "../../firebase";
 import { getDoc, doc } from "firebase/firestore";
 import { setCart } from "../../store/cart-slice";
 
 const useFetchCart = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
   useEffect(() => {
-    const cartId = localStorage.getItem("cartId");
-    if (cartId) {
-      const docRef = doc(db, "cart", cartId);
+    if (user) {
+      const docRef = doc(db, "cart", user.uid);
       getDoc(docRef)
         .then((res) => {
-          dispatch(setCart(res.data()));
+          if (res.exists()) {
+            dispatch(setCart(res.data()));
+          }
         })
         .catch((e) => {
           console.log(e);
         });
     }
-  }, [dispatch]);
+  }, [dispatch, user]);
 };
 
 export default useFetchCart;

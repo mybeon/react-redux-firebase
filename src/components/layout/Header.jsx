@@ -8,6 +8,7 @@ import { addNotification } from "../../store/auth-slice";
 import Auth from "../auth/index";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
+import { BsFillPersonFill } from "react-icons/bs";
 
 const Header = (props) => {
   let button;
@@ -26,9 +27,15 @@ const Header = (props) => {
 
   if (authState.user) {
     button = (
-      <button className={styles.button} onClick={onLogout}>
-        <span>Logout</span>
-      </button>
+      <React.Fragment>
+        <div className={styles.welcome}>
+          <BsFillPersonFill />
+          <span>Welcome back, {authState.user.name}</span>
+        </div>
+        <button className={styles.button} onClick={onLogout}>
+          <span>Logout</span>
+        </button>
+      </React.Fragment>
     );
   } else {
     button = (

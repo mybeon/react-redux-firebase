@@ -58,3 +58,17 @@ table tbody tr {
 table tbody tr:nth-child(odd) {
   background-color: #ffffff;
 }
+
+.no-orders {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.no-orders p {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.no-orders a {
+  color: #4d1601;
+}

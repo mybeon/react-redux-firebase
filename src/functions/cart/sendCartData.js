@@ -1,11 +1,9 @@
 import { db } from "../../firebase";
 import { setDoc, doc } from "@firebase/firestore";
-import getCartId from "./getCartId";
 
-const sendCartData = async ({ items, totalAmount }) => {
+const sendCartData = async ({ id, items, totalAmount }) => {
   try {
-    const cartId = getCartId();
-    await setDoc(doc(db, "cart", cartId), { items, totalAmount });
+    await setDoc(doc(db, "cart", id), { items, totalAmount });
     return "success";
   } catch (e) {
     return "firebase failed " + e;

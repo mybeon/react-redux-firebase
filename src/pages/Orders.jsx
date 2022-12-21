@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, where, query } from "firebase/firestore";
 import { db } from "../firebase";
 import { BeatLoader } from "react-spinners";
 import Table from "../components/Table";
 import ProtectedRoute from "../components/auth/ProtectedRoute";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Orders = () => {
   const [orders, setOrders] = useState(null);
+  const { user } = useSelector((state) => state.auth);
   useEffect(() => {
-    getDocs(collection(db, "orders"))
+    const collRef = collection(db, "orders");
+    const q = query(collRef, where("userId", "==", user.uid));
+    getDocs(q)
       .then((res) => {
         const documents = [];
         res.forEach((doc) => documents.push({ id: doc.id, ...doc.data() }));
@@ -17,7 +22,7 @@ const Orders = () => {
       .catch((e) => {
         alert(e);
       });
-  }, []);
+  }, [user?.uid]);
   let tableContent;
   if (orders === null) {
     tableContent = (
@@ -28,6 +33,14 @@ const Orders = () => {
   }
   if (orders && orders.length > 0) {
     tableContent = <Table data={orders} />;
+  }
+  if (orders && orders.length === 0) {
+    tableContent = (
+      <div className="no-orders">
+        <p>You have no orders yet.</p>
+        <Link to="/">Make your first order !</Link>
+      </div>
+    );
   }
   return (
     <ProtectedRoute>

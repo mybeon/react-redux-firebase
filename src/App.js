@@ -1,31 +1,21 @@
-import React, { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
+import React from "react";
 import Cart from "./components/Cart/Cart";
 import Header from "./components/layout/Header";
-import { useSelector, useDispatch } from "react-redux";
-import { login, logout } from "./store/auth-slice";
+import { useSelector } from "react-redux";
 import "./main.css";
-import useUpdateCart from "./hooks/cart/use-updateCart";
-import useFetchCart from "./hooks/cart/use-fetchCart";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
 import Notification from "./components/UI/Notification";
+import useUpdateCart from "./hooks/cart/use-updateCart";
+import useFetchCart from "./hooks/cart/use-fetchCart";
+import useAuth from "./hooks/auth/use-auth";
+
 function App() {
   const cart = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
   useUpdateCart();
   useFetchCart();
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
-      if (authUser) {
-        dispatch(login({ email: authUser.email, isVerified: authUser.emailVerified }));
-      } else {
-        dispatch(logout());
-      }
-    });
-    return () => unsubscribe();
-  }, [dispatch]);
+  useAuth();
+
   return (
     <React.Fragment>
       {cart.cartIsShown && <Cart />}

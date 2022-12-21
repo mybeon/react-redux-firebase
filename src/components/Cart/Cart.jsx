@@ -7,6 +7,7 @@ import { db } from "../../firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
 import { reset, hideCart } from "../../store/cart-slice";
+import { addNotification } from "../../store/auth-slice";
 
 const Cart = (props) => {
   const [userName, setUserName] = useState("");
@@ -14,6 +15,7 @@ const Cart = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const cartState = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const emptyCart = cartState.items.length === 0;
 
@@ -23,19 +25,24 @@ const Cart = (props) => {
 
   function handleOrder(userInfo) {
     setIsSubmitting(true);
-    setUserName(userInfo.name);
-
-    addDoc(collection(db, "orders"), {
-      items: cartState.items,
-      user: userInfo,
-      createdAt: Timestamp.fromDate(new Date()),
-    })
-      .then(() => {
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        dispatch(reset());
+    if (user) {
+      setUserName(userInfo.name);
+      addDoc(collection(db, "orders"), {
+        items: cartState.items,
+        user: userInfo,
+        userId: user.uid,
+        createdAt: Timestamp.fromDate(new Date()),
       })
-      .catch(() => {});
+        .then(() => {
+          setIsSubmitting(false);
+          setIsSubmitted(true);
+          dispatch(reset());
+        })
+        .catch(() => {});
+    } else {
+      setIsSubmitting(false);
+      dispatch(addNotification({ type: "error", message: "You have to be signed in." }));
+    }
   }
 
   const cartActions = (

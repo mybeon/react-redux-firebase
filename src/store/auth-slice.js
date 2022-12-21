@@ -21,9 +21,12 @@ const authSlice = createSlice({
     removeNotification(state) {
       state.notification = null;
     },
+    setUsername(state, action) {
+      state.user.name = action.payload;
+    },
   },
 });
 
-export const { login, logout, addNotification, removeNotification } = authSlice.actions;
+export const { login, logout, addNotification, removeNotification, setUsername } = authSlice.actions;
 
 export default authSlice.reducer;
