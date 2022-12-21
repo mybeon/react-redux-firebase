@@ -88,3 +88,9 @@ table tbody tr:nth-child(odd) {
 .terms p {
   margin-bottom: 1rem;
 }
+
+@media (max-width: 768px) {
+  .terms {
+    width: 85%;
+  }
+}

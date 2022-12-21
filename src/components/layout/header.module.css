@@ -63,3 +63,15 @@
   font-size: 0.8rem;
   margin-left: 0.4rem;
 }
+
+@media (max-width: 768px) {
+  .header {
+    justify-content: center;
+  }
+  .header h1 {
+    display: none;
+  }
+  .button {
+    padding: 0 1.5rem;
+  }
+}
