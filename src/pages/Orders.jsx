@@ -11,17 +11,19 @@ const Orders = () => {
   const [orders, setOrders] = useState(null);
   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
-    const collRef = collection(db, "orders");
-    const q = query(collRef, where("userId", "==", user.uid));
-    getDocs(q)
-      .then((res) => {
-        const documents = [];
-        res.forEach((doc) => documents.push({ id: doc.id, ...doc.data() }));
-        setOrders(documents);
-      })
-      .catch((e) => {
-        alert(e);
-      });
+    if (user?.uid) {
+      const collRef = collection(db, "orders");
+      const q = query(collRef, where("userId", "==", user.uid));
+      getDocs(q)
+        .then((res) => {
+          const documents = [];
+          res.forEach((doc) => documents.push({ id: doc.id, ...doc.data() }));
+          setOrders(documents);
+        })
+        .catch((e) => {
+          alert(e);
+        });
+    }
   }, [user?.uid]);
   let tableContent;
   if (orders === null) {

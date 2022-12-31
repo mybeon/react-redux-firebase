@@ -11,14 +11,14 @@ import useFetchCart from "./hooks/cart/use-fetchCart";
 import useAuth from "./hooks/auth/use-auth";
 
 function App() {
-  const cart = useSelector((state) => state.cart);
+  const { cartIsShown } = useSelector((state) => state.cart);
+  useAuth();
   useUpdateCart();
   useFetchCart();
-  useAuth();
 
   return (
     <React.Fragment>
-      {cart.cartIsShown && <Cart />}
+      {cartIsShown && <Cart />}
       <Notification />
       <Header />
       <main>

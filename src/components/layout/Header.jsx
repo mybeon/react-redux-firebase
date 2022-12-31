@@ -4,7 +4,6 @@ import styles from "./header.module.css";
 import HeaderCartButton from "./HeaderCartButton";
 import { useDispatch, useSelector } from "react-redux";
 import { showCart } from "../../store/cart-slice";
-import { addNotification } from "../../store/auth-slice";
 import Auth from "../auth/index";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
@@ -20,9 +19,7 @@ const Header = (props) => {
   }
 
   function onLogout() {
-    signOut(auth).then(() => {
-      dispatch(addNotification({ type: "success", message: "Logged out." }));
-    });
+    signOut(auth);
   }
 
   if (authState.user) {
